@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#usdafoodcompositiondatabasendbapihowtoguide">Intro</a></li>
+      <li><a href="#applicationprogramminginterface">API</a></li>
+      <li><a href="#theusdafoodcompositiondatabasendbapi">Documentation</a></li>
+      <li><a href="#apikey">API Key</a></li>
+      <li><a href="#incrediblybasicwebpage">Basic Page</a></li>
+      <li><a href="#requests">Requests</a></li>
+      <li><a href="#javascriptobjectnotation">JSON</a></li>
+      <li><a href="#puttingitalltogether">Example</a></li>
+      <li><a href="#end">End</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+
+<h1 id="usdafoodcompositiondatabasendbapihowtoguide">USDA Food Composition Database NDB API How To Guide</h1>
+
+<p>The purpose of this guide is to illustrate how to utilize the USDA Food Composition Database NDB API. 
+This guide will explain the <em>basics of an API</em>, <em>how to make a request</em>, <em>what a request is</em>, <em>what a JSON object is</em>, <em>what the four functions of the API are</em> and <em>how to use them</em>. </p>
+
+<p><strong>Note: To use this guide to the full potential it will help to have some knowledge of HTML, JavaScript and DOM elements.</strong></p>
+
+<h2 id="applicationprogramminginterface">Application Programming Interface</h2>
+
+<p>An Application Programming Interface (API) is an interface that allows programmers to have their application access other programs.</p>
+
+<p>To clarify the definition, think about it in terms of an air conditioner control panel. The panel displays the temperature and allows it to be adjusted using buttons. It is not necessary, nor practical, to try and understand the inner workings of how the panel sends signals to the fans in order to make adjust the temperature so the panel would be considered an interface which allows one to regulate temperature without having to know what takes place behind the scenes. 
+The air conditioner control panel is essentially what an API is.</p>
+
+<p>Most APIs use an API key that identifies the accessing program and allows the source program to monitor requests and request counts. This guide will also show how to get an API key for the USDA Food Composition Database NDB (it’s really quite easy).</p>
+
+<h2 id="theusdafoodcompositiondatabasendbapi">The USDA Food Composition Database NDB API</h2>
+
+<p>The main usage of this API is to gather food and nutrient data to use in an application or website. A more thorough explanation and documentation can be found <a href="https://ndb.nal.usda.gov/ndb/api/doc">here</a>. You should follow the link, read through the page(it is very short) and leave it open for the remainder of the guide.</p>
+
+<p><strong>Note: If you do not quite understand what is on the page, do not worry because it will be explained.</strong></p>
+
+<h3 id="apikey">API Key</h3>
+
+<p>In order to use this API we will need to start by getting a <strong>unique key</strong>, so on the link you followed above (<a href="https://ndb.nal.usda.gov/ndb/api/doc">here</a> if you already closed it or did not follow it the first time) go to the Gaining Access section click the <strong>“Sign up now”</strong> and this prompt will appear.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/22179082/26362869/5165ad84-3fad-11e7-90d4-eb4ea521ea16.png" alt="API Key Image" /></p>
+
+<p>Once you fill out the form you will receive a key in an email. This key will allow you to access the database and is necessary to continue.</p>
+
+<p><strong>Note: You should never share your API key however I am sharing mine for the following example (and so the graders do not have to go get their own key</strong> </p>
+
+<h2 id="incrediblybasicwebpage">Incredibly Basic Webpage</h2>
+
+<p>Now we will look at the entire code to make a simple webpage. This is an embedded jsfiddle so you can try it out and see what the final result will look like. </p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/greenlan/k2bgv3r9/19/embedded/js,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>It may look long but luckily it is not as complicated as it appears and the guide will go through the API related code step by step. </p>
+
+<p><strong>Note: Hopefully, you have some knowledge of javascript and DOM because most of the code displayed is creating the inputs and buttons which this guide will not cover since this guide is how to use the API.</strong></p>
+
+<h1 id="actuallyusingtheapi">Actually Using the API</h1>
+
+<p>The guide has thus far prepared you for actually using the API and and after seeing the example you may be thinking you are ready to go off and try it and now... We are almost there. </p>
+
+<p>There are two main things that this guide will go over before sending you on your way and those are Requests and JSON objects.</p>
+
+<h2 id="requests">Requests</h2>
+
+<p>An API request is pretty much exactly what one would expect it to be, which is to ask for information from a source. The two prominent types of requests are GET and POST requests. For this API, we will be using GET requests to “get” data from the database. 
+There are four main ways to get data from this API: a <strong><a href="https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md">search</a>, <a href="https://ndb.nal.usda.gov/ndb/doc/apilist/API-LIST.md">list</a>, <a href="https://ndb.nal.usda.gov/ndb/doc/apilist/API-FOOD-REPORTV2.md">food report</a> and <a href="https://ndb.nal.usda.gov/ndb/doc/apilist/API-NUTRIENT-REPORT.md">nutrient report</a></strong> all of which are explained in greater detail on their respective links so take a look at those, keep them open and then come back here.</p>
+
+<p>The best way to proceed is to look at an example and then examine it to understand what is happening. </p>
+
+<p><strong>Note: The following code is JavaScript and can be placed directly in the script section of a blank html page.</strong></p>
+
+<p>Here is a look at making a search GET request: </p>
+
+<pre><code class="javascript language-javascript">    var req = new XMLHttpRequest();
+    var s = document.getElementById("search_input").value;
+    req.open("GET", "https://api.nal.usda.gov/ndb/search/?format=json&amp;q="+s+"&amp;sort=n&amp;max=25&amp;offset=0&amp;api_key="+api_key, true);
+
+    req.addEventListener('load',function()
+    {
+        if(req.status &gt;= 200 &amp;&amp; req.status &lt; 400)
+        {
+            console.log(JSON.parse(req.responseText));
+            var results = JSON.parse(req.responseText);
+            displayResultsSearch(results);
+        }
+        else 
+        {
+            console.log("Error in network request: " + req.statusText);
+        }
+    });
+    req.send(null);
+</code></pre>
+
+<p>And that is it for a request. 
+After looking at the basic webpage earlier you may be surprised at how short this is but this may be new to you so let’s look at what is going on line by line:</p>
+
+<pre><code class="javascript  language-javascript ">var req = new XMLHttpRequest();
+</code></pre>
+
+<p>This line creates the request obect that will make an HTTP request and return the data it gets.</p>
+
+<pre><code class="javascript  language-javascript ">var s = document.getElementById("search_input").value;
+</code></pre>
+
+<p>This line searches for the input value from our HTML website to place in our request at the search parameter.</p>
+
+<pre><code class="javascript  language-javascript ">req.open("GET", "https://api.nal.usda.gov/ndb/search/?format=json&amp;q="+s+"&amp;sort=n&amp;max=25&amp;offset=0&amp;api_key="+api_key, true);
+</code></pre>
+
+<p>This line opens a get request to retrieve information about the search parameter s in the json format. It requests the information from the database url using the api_key as the API key. The final parameter is set to true to make it an asynchronous request which basically means that the application is allowed to perform other tasks while waiting for the request by providing it a callback function (One of the easiest ways to accomplish this is to bind the request to a submit button).</p>
+
+<p><strong>Note: For this database the only thing that changes between the four different functions is the url parameter which can be found on each of the respective pages linked in the requests section earlier.</strong></p>
+
+<pre><code class="javascript  language-javascript ">req.send(null);
+</code></pre>
+
+<p>This line at the end sends the request to the url where the null means no additional data is being sent with the request.</p>
+
+<pre><code class="javascript language-javascript">    req.addEventListener('load',function()
+    {
+        if(req.status &gt;= 200 &amp;&amp; req.status &lt; 400)
+        {
+            //console.log(JSON.parse(req.responseText));
+            //var results = JSON.parse(req.responseText);
+            displayResultsSearch(results);
+        }
+        else 
+        {
+            console.log("Error in network request: " + req.statusText);
+        }
+    });
+</code></pre>
+
+<p>This section of code all goes together but first an explanation of the uncommented lines:</p>
+
+<p>These lines add an event to the request object to tell it to do the function once a request is received. The if-else statement is included to ensure that if there is an error in the request the function can handle it correctly and the uncommented line in the if statement is a function used to display the results.</p>
+
+<p>And to understand what the commented out lines are doing we should look at JSON objects.</p>
+
+<h2 id="javascriptobjectnotation">JavaScript Object Notation</h2>
+
+<p>JSON is a text object in javascript that allows the server and client to send and receive data without difficult parsing to extract the data. Here is a look at the data in the console: </p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/22179082/26525609/a0c410e8-432a-11e7-983d-2e8ff9bb18df.png" alt="Console Log Image" /></p>
+
+<p>Fortunately javascript has a built-in function for parsing the information so the lines</p>
+
+<pre><code class="javascript  language-javascript ">//console.log(JSON.parse(req.responseText));
+//var results = JSON.parse(req.responseText);
+</code></pre>
+
+<p>has JSON.parse with the request response text as the parameter which processes the data and allows the application to access the data using bracket notation like so:</p>
+
+<p><code>javascript results["list"]["item"][0]["ndbno"]</code></p>
+
+<p>This will display the first item's ndbno from the search. The strings in the brackets are the properties of the JSON object. For our search example these properties can be found on the search page (that you should hopefully still have open!) in a section that looks like this:</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/22179082/26525612/b8f89594-432a-11e7-8eb5-b094c946520f.png" alt="Response Element Image" /></p>
+
+<p>These elements are all the sections of the search functions that you can extract. Each of the other three functions have their own respective elements and have access to different data. </p>
+
+<p><strong>Note: There is an example for each function in the simple website at the top but experiment with it for yourself!</strong></p>
+
+<h1 id="puttingitalltogether">Putting It All Together</h1>
+
+<p>Now that we have gone over the foundation of APIs and specifically the USDA Food Composition Database NDB API, let’s do something a little useful with it. The idea of this API is to get data from the USDA Food Composition Database NDB so let’s do so.</p>
+
+<p><strong>Note: This is basic DOM just to illustrate what the database can do (it is not formatted in any way)</strong></p>
+
+<p>So here the code will take the first option of the search and display the name and ingredients from the food report:</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/greenlan/9eeschs5/7/embedded/js,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<h1 id="end">End</h1>
+
+<p>This is just one way that you can use the database to include information on a webpage, but there are countless ways to use the data so go have fun and I hope you enjoyed this guide on the USDA Food Composition Database NDB API!</p>
+
+</body>
+</html>
