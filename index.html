@@ -55,10 +55,14 @@ li a:hover:not(.active) {
 }
     
 code { 
-    background-color: #006400; 
-    border: 1px solid #000000;
-    text-align: center;
+    background-color: #f1f1f1;
+	font-family: "Courier New", Courier, monospace;
 }
+
+pre {
+    border: 1px solid #000000; 
+	background-color: #f1f1f1;
+    }
 
 </style>
 </head>
@@ -143,32 +147,31 @@ There are four main ways to get data from this API: a <strong><a href="https://n
 
 <p>Here is a look at making a search GET request: </p>
 
-<pre><code class="javascript language-javascript">
-    var req = new XMLHttpRequest();
-    var s = document.getElementById("search_input").value;
-    req.open("GET", "https://api.nal.usda.gov/ndb/search/?format=json&amp;q="+s+"&amp;sort=n&amp;max=25&amp;offset=0&amp;api_key="+api_key, true);
+<pre><code class="javascript language-javascript">var req = new XMLHttpRequest();
+var s = document.getElementById("search_input").value;
+req.open("GET", "https://api.nal.usda.gov/ndb/search/?format=json&amp;q="+s+"&amp;sort=n&amp;max=25&amp;offset=0&amp;api_key="+api_key, true);
 
-    req.addEventListener('load',function()
+req.addEventListener('load',function()
+{
+    if(req.status &gt;= 200 &amp;&amp; req.status &lt; 400)
     {
-        if(req.status &gt;= 200 &amp;&amp; req.status &lt; 400)
-        {
-            console.log(JSON.parse(req.responseText));
-            var results = JSON.parse(req.responseText);
-            displayResultsSearch(results);
-        }
-        else 
-        {
-            console.log("Error in network request: " + req.statusText);
-        }
-    });
-    req.send(null);
+        console.log(JSON.parse(req.responseText));
+        var results = JSON.parse(req.responseText);
+        displayResultsSearch(results);
+    }
+    else 
+    {
+        console.log("Error in network request: " + req.statusText);
+    }
+});
+req.send(null);
 </code></pre>
 
 <p>And that is it for a request. 
 After looking at the basic webpage earlier you may be surprised at how short this is but this may be new to you so let’s look at what is going on line by line:</p>
 
-<code class="javascript  language-javascript ">var req = new XMLHttpRequest();
-</code>
+<pre><code class="javascript  language-javascript ">var req = new XMLHttpRequest();
+</code></pre>
 
 <p>This line creates the request obect that will make an HTTP request and return the data it gets.</p>
 
@@ -189,8 +192,7 @@ After looking at the basic webpage earlier you may be surprised at how short thi
 
 <p>This line at the end sends the request to the url where the null means no additional data is being sent with the request.</p>
 
-<pre><code class="javascript language-javascript">
-req.addEventListener('load',function()
+<pre><code class="javascript language-javascript">req.addEventListener('load',function()
     {
         if(req.status &gt;= 200 &amp;&amp; req.status &lt; 400)
         {
