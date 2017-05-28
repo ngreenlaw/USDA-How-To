@@ -37,7 +37,7 @@ ul {
     width: 10%;
     background-color: #006400;
     position: fixed;
-    height: 50%;
+    height: 45%;
     overflow: auto;
 }
 
@@ -113,23 +113,23 @@ The air conditioner control panel is essentially what an API is.</p>
 
 <h2 id="theusdafoodcompositiondatabasendbapi">The USDA Food Composition Database NDB API</h2>
 
-<p>The main usage of this API is to gather food and nutrient data to use in an application or website. A more thorough explanation and documentation can be found <a href="https://ndb.nal.usda.gov/ndb/api/doc">here</a>. You should follow the link, read through the page(it is very short) and leave it open for the remainder of the guide.</p>
+<p>The main usage of this API is to gather food and nutrient data to use in an application or website. A more thorough explanation and documentation can be found <a href="https://ndb.nal.usda.gov/ndb/api/doc">here</a>. You should follow the link, read through the page (it is very short) and leave it open for the remainder of the guide.</p>
 
 <p><strong>Note: If you do not quite understand what is on the page, do not worry because it will be explained.</strong></p>
 
 <h3 id="apikey">API Key</h3>
 
-<p>In order to use this API we will need to start by getting a <strong>unique key</strong>, so on the link you followed above (<a href="https://ndb.nal.usda.gov/ndb/api/doc">here</a> if you already closed it or did not follow it the first time) go to the Gaining Access section click the <strong>“Sign up now”</strong> and this prompt will appear.</p>
+<p>In order to use this API we will need to start by getting a <strong>unique key</strong>, so on the link you followed above (<a href="https://ndb.nal.usda.gov/ndb/api/doc">here</a> if you already closed it or did not follow it the first time) go to the Gaining Access section click the <strong>“Sign up now”</strong> and this prompt will appear:</p>
 
 <p><img src="https://cloud.githubusercontent.com/assets/22179082/26362869/5165ad84-3fad-11e7-90d4-eb4ea521ea16.png" alt="API Key Image" /></p>
 
 <p>Once you fill out the form you will receive a key in an email. This key will allow you to access the database and is necessary to continue.</p>
 
-<p><strong>Note: You should never share your API key however I am sharing mine for the following example (and so the graders do not have to go get their own key</strong> </p>
+<p><strong>Note: You should never share your API key, however, I am sharing mine for the following example (and so the graders do not have to go get their own key).</strong> </p>
 
 <h2 id="incrediblybasicwebpage">Incredibly Basic Webpage</h2>
 
-<p>Now we will look at the entire code to make a simple webpage. This is an embedded jsfiddle so you can try it out and see what the final result will look like. </p>
+<p>Now we will look at the entire code to make a simple webpage. This is an embedded JSFiddle so you can try it out and see what the final result will look like. </p>
 
 <iframe width="100%" height="300" src="//jsfiddle.net/greenlan/k2bgv3r9/19/embedded/js,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
@@ -190,7 +190,7 @@ After looking at the basic webpage earlier you may be surprised at how short thi
 <pre><code class="javascript  language-javascript ">req.open("GET", "https://api.nal.usda.gov/ndb/search/?format=json&amp;q="+s+"&amp;sort=n&amp;max=25&amp;offset=0&amp;api_key="+api_key, true);
 </code></pre>
 
-<p>This line opens a get request to retrieve information about the search parameter s in the json format. It requests the information from the database url using the api_key as the API key. The final parameter is set to true to make it an asynchronous request which basically means that the application is allowed to perform other tasks while waiting for the request by providing it a callback function (One of the easiest ways to accomplish this is to bind the request to a submit button).</p>
+<p>This line opens a get request to retrieve information about the search parameter <i>s</i> in the json format. It requests the information from the database url using the api_key as the API key. The final parameter is set to true to make it an asynchronous request which basically means that the application is allowed to perform other tasks while waiting for the request by providing it a callback function (One of the easiest ways to accomplish this is to bind the request to a submit button).</p>
 
 <p><strong>Note: For this database the only thing that changes between the four different functions is the url parameter which can be found on each of the respective pages linked in the requests section earlier.</strong></p>
 
@@ -214,7 +214,7 @@ After looking at the basic webpage earlier you may be surprised at how short thi
     });
 </code></pre>
 
-<p>This section of code all goes together but first an explanation of the uncommented lines:</p>
+<p>This section of code all goes together, but first, an explanation of the uncommented lines:</p>
 
 <p>These lines add an event to the request object to tell it to do the function once a request is received. The if-else statement is included to ensure that if there is an error in the request the function can handle it correctly and the uncommented line in the if statement is a function used to display the results.</p>
 
@@ -248,7 +248,7 @@ After looking at the basic webpage earlier you may be surprised at how short thi
 
 <p>Now that we have gone over the foundation of APIs and specifically the USDA Food Composition Database NDB API, let’s do something a little useful with it. The idea of this API is to get data from the USDA Food Composition Database NDB so let’s do so.</p>
 
-<p>The following code will take the first option of the search and display the name and ingredients from the food report:</p>
+<p>The following code will take the first option of the search and display the name and ingredients from the food report for example, try searching for Apple Sauce in the results tab:</p>
 
 <iframe width="100%" height="300" src="//jsfiddle.net/greenlan/9eeschs5/7/embedded/js,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
